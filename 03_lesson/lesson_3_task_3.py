@@ -10,9 +10,9 @@ ExMailing = Mailing(
     250,
     "AA123456789BB")
 
-print(f"Отправление {ExMailing.track} из {ExMailing.from_adderess.index}, "
-      f" {ExMailing.from_adderess.city}, {ExMailing.from_adderess.street}, "
-      f"{ExMailing.from_adderess.house} - {ExMailing.from_adderess.apartment} "
+print(f"Отправление {ExMailing.track} из {ExMailing.from_address.index}, "
+      f" {ExMailing.from_address.city}, {ExMailing.from_address.street}, "
+      f"{ExMailing.from_address.house} - {ExMailing.from_address.apartment} "
       f"в {ExMailing.to_address.index}, {ExMailing.to_address.city}, "
       f"{ExMailing.to_address.street}, {ExMailing.to_address.house} - "
       f"{ExMailing.to_address.apartment}. Стоимость {ExMailing.cost} рублей.")
