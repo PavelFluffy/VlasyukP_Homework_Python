@@ -15,4 +15,4 @@ WebDriverWait(driver, 10).until(EC.text_to_be_present_in_element
                                 ((By.CLASS_NAME, "btn-primary"), "SkyPro"))
 
 print(blue_botton.text)
-driver.quit
+driver.quit()

@@ -13,4 +13,4 @@ input_box.send_keys("SkyPro")
 blue_botton.click()
 
 print(blue_botton.text)
-driver.quit
+driver.quit()
