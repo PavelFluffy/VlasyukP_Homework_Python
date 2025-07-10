@@ -20,9 +20,19 @@ def wait(driver):
 def test_shop(driver, wait):
     driver.get("https://www.saucedemo.com/")
 
-    driver.find_element(By.ID, "user-name").send_keys("standard_user")
-    driver.find_element(By.ID, "password").send_keys("secret_sauce")
+    login_form = {
+        "user-name": "standard_user",
+        "password": "secret_sauce"
+    }
+    for field_login, value in login_form.items():
+        field_auto = wait.until(EC.presence_of_element_located((
+            By.ID, field_login)))
+        field_auto.send_keys(value)
+
     driver.find_element(By.ID, "login-button").click()
+
+    wait.until(EC.presence_of_all_elements_located((
+        By.CLASS_NAME, "inventory_item_description")))
 
     driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
     driver.find_element(By.ID, "add-to-cart-sauce-labs-bolt-t-shirt").click()
@@ -30,14 +40,23 @@ def test_shop(driver, wait):
 
     driver.find_element(By.ID, "shopping_cart_container").click()
 
-    driver.find_element(By.ID, "checkout").click()
+    wait.until(EC.presence_of_element_located((
+        By.ID, "checkout"))).click()
 
-    driver.find_element(By.NAME, "firstName").send_keys("Иван")
-    driver.find_element(By.NAME, "lastName").send_keys("Иванов")
-    driver.find_element(By.NAME, "postalCode").send_keys("140140")
+    delivery_form = {
+        "firstName": "Иван",
+        "lastName": "Иванов",
+        "postalCode": "140140",
+    }
+    for field_name, value in delivery_form.items():
+        field = wait.until(EC.presence_of_element_located((
+            By.NAME, field_name)))
+        field.send_keys(value)
+    # driver.find_element(By.NAME, "firstName").send_keys("Иван")
+    # driver.find_element(By.NAME, "lastName").send_keys("Иванов")
+    # driver.find_element(By.NAME, "postalCode").send_keys("140140")
     driver.find_element(By.ID, "continue").click()
 
     price_total = wait.until(EC.presence_of_element_located((
         By.CLASS_NAME, "summary_total_label")))
-    print(price_total.text)
     assert price_total.text == "Total: $58.29"
