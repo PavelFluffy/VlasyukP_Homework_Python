@@ -52,9 +52,7 @@ def test_shop(driver, wait):
         field = wait.until(EC.presence_of_element_located((
             By.NAME, field_name)))
         field.send_keys(value)
-    # driver.find_element(By.NAME, "firstName").send_keys("Иван")
-    # driver.find_element(By.NAME, "lastName").send_keys("Иванов")
-    # driver.find_element(By.NAME, "postalCode").send_keys("140140")
+
     driver.find_element(By.ID, "continue").click()
 
     price_total = wait.until(EC.presence_of_element_located((
