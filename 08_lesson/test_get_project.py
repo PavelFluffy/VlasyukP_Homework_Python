@@ -2,7 +2,7 @@ import requests
 import pytest
 
 
-token = 'Вставить токен'
+token = 'token'
 head = {"Authorization": token, "Content-Type": "application/json"}
 
 
@@ -10,7 +10,8 @@ head = {"Authorization": token, "Content-Type": "application/json"}
 def create():
     resp = requests.post('https://yougile.com/api-v2/projects/',
                          headers=head,
-                         json={"title": "Домашка"})
+                         json={"title": "Домашка", "users": {
+                             '01050c0b-231a-4ee3-b7f4-22435fe483c3': 'admin'}})
     project_id = resp.json()["id"]
     yield project_id
     requests.put(f'https://yougile.com/api-v2/projects/{project_id}',
